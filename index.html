@@ -12,5 +12,44 @@
   <body>
     <div id="root"></div>
     <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+    <script>
+      // Make logos clickable after React app loads
+      function makeLogosClickable() {
+        // Find all logo images (both header and footer)
+        const logoImages = document.querySelectorAll('img[alt="Revive"]');
+        
+        logoImages.forEach(img => {
+          // Only add click handler if not already wrapped in a link
+          if (!img.closest('a')) {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function() {
+              // Scroll to top of page
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+          }
+        });
+      }
+      
+      // Wait for React app to load and try multiple times
+      let attempts = 0;
+      const maxAttempts = 10;
+      
+      function tryMakeLogosClickable() {
+        const logoImages = document.querySelectorAll('img[alt="Revive"]');
+        if (logoImages.length > 0) {
+          makeLogosClickable();
+        } else if (attempts < maxAttempts) {
+          attempts++;
+          setTimeout(tryMakeLogosClickable, 500);
+        }
+      }
+      
+      // Start trying after DOM is loaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tryMakeLogosClickable);
+      } else {
+        tryMakeLogosClickable();
+      }
+    </script>
   </body>
 </html>
