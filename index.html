@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/website/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/website/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Revive - Turn Dead Leads Into Booked Sales Calls</title>
     <script type="module" crossorigin src="/assets/index-CF4YpnJ_.js"></script>
@@ -30,6 +29,48 @@
         });
       }
       
+      // Handle anchor links when page loads
+      function handleAnchorLinks() {
+        const hash = window.location.hash;
+        if (hash) {
+          // Remove the # from the hash
+          const targetId = hash.substring(1);
+          
+          // Wait a bit for React to render, then scroll to the target
+          setTimeout(() => {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              // If no element found, try common section names
+              const sectionMappings = {
+                'about': 'about',
+                'features': 'features', 
+                'industries': 'industries',
+                'contact': 'contact'
+              };
+              
+              const mappedId = sectionMappings[targetId];
+              if (mappedId) {
+                const mappedElement = document.getElementById(mappedId);
+                if (mappedElement) {
+                  mappedElement.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  // Try finding by text content or class names
+                  const elements = document.querySelectorAll('h1, h2, h3, section, div');
+                  for (let el of elements) {
+                    if (el.textContent && el.textContent.toLowerCase().includes(targetId.toLowerCase())) {
+                      el.scrollIntoView({ behavior: 'smooth' });
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+          }, 1000); // Wait 1 second for React to fully load
+        }
+      }
+      
       // Wait for React app to load and try multiple times
       let attempts = 0;
       const maxAttempts = 10;
@@ -46,10 +87,17 @@
       
       // Start trying after DOM is loaded
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', tryMakeLogosClickable);
+        document.addEventListener('DOMContentLoaded', function() {
+          tryMakeLogosClickable();
+          handleAnchorLinks();
+        });
       } else {
         tryMakeLogosClickable();
+        handleAnchorLinks();
       }
+      
+      // Also handle anchor links when hash changes
+      window.addEventListener('hashchange', handleAnchorLinks);
     </script>
   </body>
 </html>
