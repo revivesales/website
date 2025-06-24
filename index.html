@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+    <link rel="apple-touch-icon" href="favicon.png?v=2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Revive - Turn Dead Leads Into Booked Sales Calls</title>
     <script type="module" crossorigin src="/assets/index-CF4YpnJ_.js"></script>
@@ -29,51 +31,121 @@
         });
       }
       
-      // Handle anchor links when page loads
+      // Enhanced anchor link handling with multiple detection strategies
       function handleAnchorLinks() {
         const hash = window.location.hash;
         if (hash) {
-          // Remove the # from the hash
-          const targetId = hash.substring(1);
+          const targetId = hash.substring(1).toLowerCase();
           
-          // Wait a bit for React to render, then scroll to the target
+          // Wait for React to render, then try multiple strategies
           setTimeout(() => {
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-              targetElement.scrollIntoView({ behavior: 'smooth' });
-            } else {
-              // If no element found, try common section names
-              const sectionMappings = {
-                'about': 'about',
-                'features': 'features', 
-                'industries': 'industries',
-                'contact': 'contact'
+            let targetElement = null;
+            
+            // Strategy 1: Direct ID match
+            targetElement = document.getElementById(targetId);
+            
+            // Strategy 2: Try common variations
+            if (!targetElement) {
+              const variations = [targetId, targetId + '-section', 'section-' + targetId];
+              for (let variation of variations) {
+                targetElement = document.getElementById(variation);
+                if (targetElement) break;
+              }
+            }
+            
+            // Strategy 3: Find by heading text content
+            if (!targetElement) {
+              const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+              for (let heading of headings) {
+                const headingText = heading.textContent.toLowerCase().trim();
+                if (headingText.includes(targetId) || 
+                    targetId.includes(headingText.replace(/\s+/g, '')) ||
+                    headingText.replace(/\s+/g, '').includes(targetId)) {
+                  targetElement = heading;
+                  break;
+                }
+              }
+            }
+            
+            // Strategy 4: Find by section content for specific sections
+            if (!targetElement) {
+              const sectionKeywords = {
+                'about': ['unlock hidden revenue', 'reactivate cold leads', 'book appointments'],
+                'features': ['we upload your cold leads', 'ai engages with personalized', 'qualified prospects'],
+                'industries': ['built for high-value service', 'insurance agencies', 'real estate teams'],
+                'contact': ['try our ai sales agent', 'first name', 'last name', 'email', 'phone']
               };
               
-              const mappedId = sectionMappings[targetId];
-              if (mappedId) {
-                const mappedElement = document.getElementById(mappedId);
-                if (mappedElement) {
-                  mappedElement.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  // Try finding by text content or class names
-                  const elements = document.querySelectorAll('h1, h2, h3, section, div');
-                  for (let el of elements) {
-                    if (el.textContent && el.textContent.toLowerCase().includes(targetId.toLowerCase())) {
-                      el.scrollIntoView({ behavior: 'smooth' });
-                      break;
+              const keywords = sectionKeywords[targetId];
+              if (keywords) {
+                const allElements = document.querySelectorAll('div, section, article, main');
+                for (let element of allElements) {
+                  const elementText = element.textContent.toLowerCase();
+                  let matchCount = 0;
+                  for (let keyword of keywords) {
+                    if (elementText.includes(keyword.toLowerCase())) {
+                      matchCount++;
                     }
+                  }
+                  // If we find multiple keywords, this is likely the right section
+                  if (matchCount >= 2) {
+                    targetElement = element;
+                    break;
                   }
                 }
               }
             }
-          }, 1000); // Wait 1 second for React to fully load
+            
+            // Strategy 5: Find by button or link text
+            if (!targetElement && targetId === 'contact') {
+              const buttons = document.querySelectorAll('button, a');
+              for (let button of buttons) {
+                const buttonText = button.textContent.toLowerCase();
+                if (buttonText.includes('try our ai') || buttonText.includes('get started') || buttonText.includes('contact')) {
+                  // Find the parent container that likely contains the form
+                  let parent = button.parentElement;
+                  while (parent && parent !== document.body) {
+                    const parentText = parent.textContent.toLowerCase();
+                    if (parentText.includes('first name') || parentText.includes('email') || parentText.includes('phone')) {
+                      targetElement = parent;
+                      break;
+                    }
+                    parent = parent.parentElement;
+                  }
+                  if (targetElement) break;
+                }
+              }
+            }
+            
+            // Strategy 6: Fallback - scroll to a reasonable position based on section
+            if (!targetElement) {
+              const fallbackPositions = {
+                'about': 0.25,  // 25% down the page
+                'features': 0.4, // 40% down the page  
+                'industries': 0.7, // 70% down the page
+                'contact': 0.9   // 90% down the page
+              };
+              
+              const position = fallbackPositions[targetId];
+              if (position) {
+                const scrollPosition = document.body.scrollHeight * position;
+                window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                return;
+              }
+            }
+            
+            // If we found a target element, scroll to it
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+          }, 1500); // Increased wait time for React to fully load
         }
       }
       
       // Wait for React app to load and try multiple times
       let attempts = 0;
-      const maxAttempts = 10;
+      const maxAttempts = 15;
       
       function tryMakeLogosClickable() {
         const logoImages = document.querySelectorAll('img[alt="Revive"]');
@@ -98,6 +170,9 @@
       
       // Also handle anchor links when hash changes
       window.addEventListener('hashchange', handleAnchorLinks);
+      
+      // Additional trigger after a longer delay to ensure React is fully loaded
+      setTimeout(handleAnchorLinks, 3000);
     </script>
   </body>
 </html>
