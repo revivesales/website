@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://revivesales.github.io/website/sitemap.xml
+
+# Block access to sensitive files
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /*.json$
+
