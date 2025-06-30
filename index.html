@@ -12,7 +12,8 @@
     <link rel="shortcut icon" href="favicon.ico?v=1750774954">
     <meta name="msapplication-TileImage" content="favicon.png?v=1750774954">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Revive - Turn Dead Leads Into Booked Sales Calls</title>
+    <meta name="description" content="Our AI Sales Agent automatically re-engages your cold leads through personalized conversations, booking qualified appointments on your calendar. Try our AI sales automation platform risk-free.">
+    <title>AI Sales Agent | Turn Dead Leads Into Booked Sales Calls | Revive</title>
     <script type="module" crossorigin src="/assets/index-CF4YpnJ_.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-BW-gzsfY.css">
   </head>
@@ -179,6 +180,52 @@
       
       // Additional trigger after a longer delay to ensure React is fully loaded
       setTimeout(handleAnchorLinks, 3000);
+      
+      // Add H2 modification for SEO
+      function updateH2ForSEO() {
+        // Wait for React to render, then find and update the H2
+        setTimeout(() => {
+          const h2Elements = document.querySelectorAll('h2');
+          for (let h2 of h2Elements) {
+            const h2Text = h2.textContent.toLowerCase();
+            if (h2Text.includes('unlock hidden revenue from leads you already have')) {
+              // Update the H2 with the new SEO-optimized text
+              h2.textContent = 'Engage AI Sales Agents to Unlock Hidden Revenue From Leads You Already Have';
+              break;
+            }
+          }
+        }, 2000); // Wait 2 seconds for React to fully load
+      }
+      
+      // Start H2 update process
+      updateH2ForSEO();
+      
+      // Also try multiple times to ensure it works
+      setTimeout(updateH2ForSEO, 3000);
+      setTimeout(updateH2ForSEO, 5000);
+      
+      // Add H3 modification for "AI Engages" heading
+      function updateAIEngagesHeading() {
+        // Wait for React to render, then find and update the AI Engages heading
+        setTimeout(() => {
+          const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+          for (let heading of headings) {
+            const headingText = heading.textContent.toLowerCase();
+            if (headingText.includes('ai engages with personalized messages')) {
+              // Update the heading with the new SEO-optimized text
+              heading.textContent = 'AI Sales Agents Engage Leads with Personalized Messages';
+              break;
+            }
+          }
+        }, 2000); // Wait 2 seconds for React to fully load
+      }
+      
+      // Start AI Engages heading update process
+      updateAIEngagesHeading();
+      
+      // Also try multiple times to ensure it works
+      setTimeout(updateAIEngagesHeading, 3000);
+      setTimeout(updateAIEngagesHeading, 5000);
     </script>
   </body>
 </html>
