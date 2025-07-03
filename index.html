@@ -226,6 +226,108 @@
       // Also try multiple times to ensure it works
       setTimeout(updateAIEngagesHeading, 3000);
       setTimeout(updateAIEngagesHeading, 5000);
+      
+      // Create promotional banner from scratch
+      function createPromotionalBanner() {
+        // Check if banner already exists
+        if (document.getElementById('promotional-banner')) {
+          return;
+        }
+        
+        // Create banner element
+        const banner = document.createElement('div');
+        banner.id = 'promotional-banner';
+        banner.innerHTML = '🚀 Free AI Reactivation Pilot: Only 3 Spots Left! 100% free trial to revive your cold leads in exchange for a testimonial. Apply now!';
+        
+        // Add banner styles
+        banner.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 9999;
+          background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+          color: white;
+          text-align: center;
+          padding: 12px 20px;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 1.4;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        `;
+        
+        // Add hover effect
+        banner.addEventListener('mouseenter', function() {
+          this.style.background = 'linear-gradient(135deg, #15803d 0%, #166534 100%)';
+          this.style.transform = 'translateY(1px)';
+        });
+        
+        banner.addEventListener('mouseleave', function() {
+          this.style.background = 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)';
+          this.style.transform = 'translateY(0)';
+        });
+        
+        // Add click handler to scroll to contact form
+        banner.addEventListener('click', function() {
+          const contactSection = document.getElementById('contact') || 
+                                document.querySelector('[id*="contact"]') ||
+                                document.querySelector('section:last-of-type');
+          
+          if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            // Fallback: scroll to bottom of page
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          }
+        });
+        
+        // Insert banner at the top of the body
+        document.body.insertBefore(banner, document.body.firstChild);
+        
+        // Add body padding to account for fixed banner
+        document.body.style.paddingTop = '120px';
+        
+        // Responsive design for mobile
+        if (window.innerWidth <= 768) {
+          banner.style.fontSize = '13px';
+          banner.style.padding = '10px 15px';
+          document.body.style.paddingTop = '100px';
+        }
+      }
+      
+      // Create banner after React loads
+      function tryCreateBanner() {
+        // Wait for React to load, then create banner
+        setTimeout(() => {
+          createPromotionalBanner();
+        }, 1000);
+      }
+      
+      // Start banner creation process
+      tryCreateBanner();
+      
+      // Also try multiple times to ensure it works
+      setTimeout(createPromotionalBanner, 2000);
+      setTimeout(createPromotionalBanner, 3000);
+      
+      // Handle window resize for responsive design
+      window.addEventListener('resize', function() {
+        const banner = document.getElementById('promotional-banner');
+        if (banner) {
+          if (window.innerWidth <= 768) {
+            banner.style.fontSize = '13px';
+            banner.style.padding = '10px 15px';
+            document.body.style.paddingTop = '100px';
+          } else {
+            banner.style.fontSize = '14px';
+            banner.style.padding = '12px 20px';
+            document.body.style.paddingTop = '120px';
+          }
+        }
+      });
     </script>
   </body>
 </html>
