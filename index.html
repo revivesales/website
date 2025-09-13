@@ -107,12 +107,116 @@
           top: 55px !important; /* Account for mobile banner height */
         }
       }
+      
+      /* Fix green circle backgrounds for numbered steps */
+      .step-number, 
+      [class*="step"], 
+      [class*="number"],
+      div[style*="background-color: rgb(34, 197, 94)"],
+      div[style*="background-color: #22c55e"],
+      div[style*="background: rgb(34, 197, 94)"],
+      div[style*="background: #22c55e"] {
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+        min-width: 60px !important;
+        min-height: 60px !important;
+        max-width: 60px !important;
+        max-height: 60px !important;
+      }
+      
+      /* Target all green background elements that might contain numbers */
+      div[style*="background"]:has-text("1"),
+      div[style*="background"]:has-text("2"), 
+      div[style*="background"]:has-text("3"),
+      div[style*="background"]:has-text("4"),
+      span[style*="background"]:has-text("1"),
+      span[style*="background"]:has-text("2"),
+      span[style*="background"]:has-text("3"),
+      span[style*="background"]:has-text("4") {
+        border-radius: 50% !important;
+        width: 60px !important;
+        height: 60px !important;
+        min-width: 60px !important;
+        min-height: 60px !important;
+        max-width: 60px !important;
+        max-height: 60px !important;
+      }
+      
+      /* Fix for numbered step circles to maintain perfect circular shape */
+      .bg-green-600.text-white.rounded-full.w-8.h-8.flex.items-center.justify-center.font-bold {
+        min-width: 32px !important;
+        max-width: 32px !important;
+        width: 32px !important;
+        min-height: 32px !important;
+        max-height: 32px !important;
+        height: 32px !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        box-sizing: border-box !important;
+      }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="https://link.msgsndr.com/js/form_embed.js"></script>
     <script>
+      // Fix green circle backgrounds for numbered steps
+      function fixGreenCircles() {
+        // Find all elements that might contain numbered steps
+        const allElements = document.querySelectorAll('*');
+        
+        allElements.forEach(element => {
+          const computedStyle = window.getComputedStyle(element);
+          const bgColor = computedStyle.backgroundColor;
+          
+          // Check if element has green background (various shades of green)
+          if (bgColor.includes('rgb(34, 197, 94)') || 
+              bgColor.includes('rgb(22, 163, 74)') || 
+              bgColor.includes('rgb(16, 185, 129)') ||
+              bgColor.includes('#22c55e') ||
+              bgColor.includes('#16a34a') ||
+              bgColor.includes('#10b981')) {
+            
+            // Check if element contains a number (1, 2, 3, or 4)
+            const text = element.textContent.trim();
+            if (text === '1' || text === '2' || text === '3' || text === '4') {
+              // Force perfect circle
+              element.style.width = '60px';
+              element.style.height = '60px';
+              element.style.minWidth = '60px';
+              element.style.minHeight = '60px';
+              element.style.maxWidth = '60px';
+              element.style.maxHeight = '60px';
+              element.style.borderRadius = '50%';
+              element.style.display = 'flex';
+              element.style.alignItems = 'center';
+              element.style.justifyContent = 'center';
+              element.style.flexShrink = '0';
+              element.style.aspectRatio = '1/1';
+              
+              console.log(`Fixed circle for number: ${text}`);
+            }
+          }
+        });
+      }
+      
+      // Run multiple times to ensure it catches React-rendered elements
+      setTimeout(fixGreenCircles, 1000);
+      setTimeout(fixGreenCircles, 2000);
+      setTimeout(fixGreenCircles, 3000);
+      
+      // Also run when page is fully loaded
+      window.addEventListener('load', fixGreenCircles);
+      
+      // Run when DOM changes (for React updates)
+      const observer = new MutationObserver(fixGreenCircles);
+      observer.observe(document.body, { childList: true, subtree: true });
+      
       // Make logos clickable after React app loads
       function makeLogosClickable() {
         // Find all logo images (both header and footer)
