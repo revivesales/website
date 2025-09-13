@@ -144,45 +144,17 @@
     <script>
       // Fix green circle backgrounds for numbered steps
       function fixGreenCircles() {
-        // Find all elements that might contain numbered steps
-        const allElements = document.querySelectorAll('*');
-
-        allElements.forEach(element => {
-          const computedStyle = window.getComputedStyle(element);
-          const bgColor = computedStyle.backgroundColor;
-
-          // Check if element has green background (various shades of green)
-          if (bgColor.includes('rgb(34, 197, 94)') ||
-              bgColor.includes('rgb(22, 163, 74)') ||
-              bgColor.includes('rgb(16, 185, 129)') ||
-              bgColor.includes('#22c55e') ||
-              bgColor.includes('#16a34a') ||
-              bgColor.includes('#10b981')) {
-
-            // Check if element contains a number (1, 2, 3, or 4)
-            const text = element.textContent.trim();
-            if (text === '1' || text === '2' || text === '3' || text === '4') {
-              // Apply class and data attribute for styling instead of :has-text
-              element.classList.add('step');
-              element.setAttribute('data-step', text);
-
-              console.log(`Fixed circle for number: ${text}`);
-            }
-          }
+        const stepElements = document.querySelectorAll('[data-step]');
+        stepElements.forEach(element => {
+          element.classList.add('step');
         });
       }
-      
-      // Run multiple times to ensure it catches React-rendered elements
-      setTimeout(fixGreenCircles, 1000);
-      setTimeout(fixGreenCircles, 2000);
-      setTimeout(fixGreenCircles, 3000);
-      
-      // Also run when page is fully loaded
-      window.addEventListener('load', fixGreenCircles);
-      
-      // Run when DOM changes (for React updates)
-      const observer = new MutationObserver(fixGreenCircles);
-      observer.observe(document.body, { childList: true, subtree: true });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        fixGreenCircles();
+        const observer = new MutationObserver(fixGreenCircles);
+        observer.observe(document.body, { childList: true, subtree: true });
+      });
       
       // Make logos clickable after React app loads
       function makeLogosClickable() {
