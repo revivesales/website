@@ -1,0 +1,21 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "This repository contains the official website for Revive Sales - an AI-powered lead reactivation service that turns dead leads into booked sales calls.",
+  "main": "index.js",
+  "scripts": {
+    "lint:html": "htmlhint '**/*.html'",
+    "lint:js": "eslint assets/**/*.js",
+    "lint:css": "stylelint '**/*.css'",
+    "test": "npm run lint:html && npm run lint:js && npm run lint:css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "htmlhint": "*",
+    "eslint": "*",
+    "stylelint": "*"
+  }
+}
