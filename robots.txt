@@ -9,3 +9,7 @@ Disallow: /.git/
 Disallow: /node_modules/
 Disallow: /*.json$
 
+# Disallow crawling of legal pages
+Disallow: /privacy-policy.html
+Disallow: /terms-conditions.html
+
