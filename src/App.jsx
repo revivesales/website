@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import PrivacyPolicy from './pages/PrivacyPolicy';
-import Terms from './pages/Terms';
+import TermsConditions from './pages/TermsConditions';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<Terms />} />
+        <Route path="/terms-conditions" element={<TermsConditions />} />
       </Routes>
       <Footer />
     </Router>
