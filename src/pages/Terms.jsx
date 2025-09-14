@@ -1,0 +1,8 @@
+export default function Terms() {
+  return (
+    <main>
+      <h1>Terms and Conditions</h1>
+      <p>These are our terms and conditions.</p>
+    </main>
+  );
+}
