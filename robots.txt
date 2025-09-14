@@ -10,6 +10,6 @@ Disallow: /node_modules/
 Disallow: /*.json$
 
 # Disallow crawling of legal pages
-Disallow: /privacy
-Disallow: /terms-conditions
+Disallow: /privacy-policy.html
+Disallow: /terms-conditions.html
 
