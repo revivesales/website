@@ -9,31 +9,39 @@ The website is automatically deployed to GitHub Pages at: **https://revivesales.
 ## 📋 Features
 
 - **Professional Landing Page**: Clean, modern design based on industry best practices
-- **HighLevel CRM Integration**: Contact form directly connected to HighLevel CRM system
+- **Routing**: Landing, Privacy Policy, and Terms pages powered by React Router
 - **Responsive Design**: Optimized for desktop and mobile devices
-- **Lead Capture**: Comprehensive form with SMS consent and lead qualification
-- **Industry Focus**: Targeted sections for Insurance, Real Estate, Medical/Dental, Home Services, Coaching, and eCommerce
 
 ## 🛠 Technology Stack
 
 - **Frontend**: React.js with Vite
-- **Styling**: Tailwind CSS
-- **CRM**: HighLevel integration via iframe embed
+- **Styling**: Tailwind CSS (coming soon)
 - **Deployment**: GitHub Pages with GitHub Actions
-- **Icons**: Lucide React
 
 ## 📁 Project Structure
 
 ```
-├── assets/                 # Static assets (images, logos)
-├── index.html             # Main HTML file
-├── .github/workflows/     # GitHub Actions deployment workflow
-└── README.md             # This file
+├── public/               # Static assets and meta files
+├── src/                  # React source code
+├── index.html            # Vite entry point
+├── vite.config.js        # Vite configuration
+└── package.json          # Project configuration
 ```
 
-## 🔄 Deployment
+## 🔧 Development
 
-The website is automatically deployed to GitHub Pages whenever changes are pushed to the `main` branch using GitHub Actions.
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+3. Build for production (output to `build/`):
+   ```bash
+   npm run build
+   ```
 
 ## 📞 Contact
 
@@ -42,4 +50,3 @@ For questions about this website or Revive Sales services, please visit our live
 ---
 
 © 2025 Revive Sales. All rights reserved.
-
