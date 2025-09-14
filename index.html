@@ -289,6 +289,8 @@
       // Wait for React app to load and try multiple times
       let attempts = 0;
       const maxAttempts = 15;
+      let navAttempts = 0;
+      const maxNavAttempts = 15;
       
       function tryMakeLogosClickable() {
         const logoImages = document.querySelectorAll('img[alt="Revive"]');
@@ -299,16 +301,36 @@
           setTimeout(tryMakeLogosClickable, 500);
         }
       }
-      
+
+      function removeContactNavLinks() {
+        document.querySelectorAll('header a, footer a').forEach(link => {
+          const href = (link.getAttribute('href') || '').toLowerCase();
+          if (href.includes('#contact')) {
+            link.remove();
+          }
+        });
+      }
+
+      function tryRemoveContactNavLinks() {
+        removeContactNavLinks();
+        const remaining = document.querySelector('header a[href*="#contact"], footer a[href*="#contact"]');
+        if (remaining && navAttempts < maxNavAttempts) {
+          navAttempts++;
+          setTimeout(tryRemoveContactNavLinks, 500);
+        }
+      }
+
       // Start trying after DOM is loaded
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
           tryMakeLogosClickable();
           handleAnchorLinks();
+          tryRemoveContactNavLinks();
         });
       } else {
         tryMakeLogosClickable();
         handleAnchorLinks();
+        tryRemoveContactNavLinks();
       }
       
       // Also handle anchor links when hash changes
