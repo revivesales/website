@@ -9,7 +9,7 @@ The website is automatically deployed to GitHub Pages at: **https://revivesales.
 ## 📋 Features
 
 - **Professional Landing Page**: Clean, modern design based on industry best practices
-- **Routing**: Landing, Privacy Policy, and Terms pages powered by React Router
+- **Routing**: Landing, Privacy Policy, and Terms & Conditions pages powered by React Router
 - **Responsive Design**: Optimized for desktop and mobile devices
 
 ## 🛠 Technology Stack
