@@ -464,6 +464,58 @@
           }
         }
       });
+
+      // Update roadmap section text
+      function updateRoadmapTexts() {
+        const replacements = [
+          {
+            old: 'Fill out the form and Ava texts you instantly, starting a SPIN sales conversation.',
+            new: 'Fill out the form and Ava texts you instantly \u2014 starting a real sales conversation.'
+          },
+          { old: 'Demo', new: 'See Ava in Action' },
+          {
+            old: 'Get a live, bespoke demo showing Ava booking calls for your business.',
+            new: 'Get a live demo showing Ava booking calls for your business in real time.'
+          },
+          { old: 'Pilot', new: 'Free Pilot' },
+          {
+            old: "We'll contact up to 1,000 of your dead leads for free and book sales calls directly to your calendar.",
+            new: 'Ava re-engages up to 1,000 of your cold leads for free and books calls straight to your calendar.'
+          },
+          { old: 'Sign-Up', new: 'Scale on Results' },
+          {
+            old: 'Love the results? Scale with us on a pay-for-performance model.',
+            new: 'Love the results? Scale effortlessly with our pay-for-performance model.'
+          },
+          { old: 'Connect New Leads', new: 'Expand to New Leads' },
+          {
+            old: 'After reviving old leads, Ava also works on your new, incoming leads',
+            new: 'After reviving old leads, Ava also qualifies and books your new incoming leads.'
+          }
+        ];
+
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+        while (walker.nextNode()) {
+          const node = walker.currentNode;
+          replacements.forEach(r => {
+            if (node.nodeValue.includes(r.old)) {
+              node.nodeValue = node.nodeValue.replace(r.old, r.new);
+            }
+          });
+        }
+      }
+
+      function tryUpdateRoadmapTexts() {
+        setTimeout(updateRoadmapTexts, 1000);
+        setTimeout(updateRoadmapTexts, 3000);
+        setTimeout(updateRoadmapTexts, 5000);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tryUpdateRoadmapTexts);
+      } else {
+        tryUpdateRoadmapTexts();
+      }
     </script>
   </body>
 </html>
