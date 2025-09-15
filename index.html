@@ -498,7 +498,7 @@
         while (walker.nextNode()) {
           const node = walker.currentNode;
           replacements.forEach(r => {
-            if (node.nodeValue.includes(r.old)) {
+            if (node.nodeValue.includes(r.old) && !node.nodeValue.includes(r.new)) {
               node.nodeValue = node.nodeValue.replace(r.old, r.new);
             }
           });
