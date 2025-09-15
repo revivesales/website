@@ -12,4 +12,5 @@ Disallow: /*.json$
 # Disallow crawling of legal pages
 Disallow: /privacy-policy.html
 Disallow: /terms-conditions.html
+Disallow: /index2.html
 
