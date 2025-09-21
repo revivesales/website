@@ -270,6 +270,118 @@
     <script src="https://link.msgsndr.com/js/form_embed.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        const STORAGE_KEY = 'demo-ai-training-form';
+        const form = document.querySelector('form');
+
+        const getStorage = () => {
+          try {
+            return window.localStorage;
+          } catch (error) {
+            return null;
+          }
+        };
+
+        const storage = getStorage();
+
+        const getEligibleElements = () => {
+          if (!form) {
+            return [];
+          }
+
+          return Array.from(form.elements).filter((element) => {
+            if (!element || !element.name || element.disabled) {
+              return false;
+            }
+
+            const type = (element.type || '').toLowerCase();
+
+            return type !== 'hidden' && type !== 'submit' && type !== 'button' && type !== 'file' && type !== 'reset';
+          });
+        };
+
+        const restoreFormValues = () => {
+          if (!storage) {
+            return;
+          }
+
+          const savedDataRaw = storage.getItem(STORAGE_KEY);
+
+          if (!savedDataRaw) {
+            return;
+          }
+
+          try {
+            const savedData = JSON.parse(savedDataRaw);
+
+            getEligibleElements().forEach((element) => {
+              const type = (element.type || '').toLowerCase();
+              const { name } = element;
+
+              if (!Object.prototype.hasOwnProperty.call(savedData, name)) {
+                return;
+              }
+
+              if (type === 'checkbox') {
+                element.checked = Boolean(savedData[name]);
+              } else if (type === 'radio') {
+                element.checked = savedData[name] === element.value;
+              } else {
+                element.value = savedData[name];
+              }
+            });
+          } catch (error) {
+            storage.removeItem(STORAGE_KEY);
+          }
+        };
+
+        const persistFormValues = () => {
+          if (!storage) {
+            return;
+          }
+
+          const data = {};
+
+          getEligibleElements().forEach((element) => {
+            const type = (element.type || '').toLowerCase();
+            const { name } = element;
+
+            if (type === 'checkbox') {
+              data[name] = element.checked;
+            } else if (type === 'radio') {
+              if (element.checked) {
+                data[name] = element.value;
+              }
+            } else {
+              data[name] = element.value;
+            }
+          });
+
+          try {
+            storage.setItem(STORAGE_KEY, JSON.stringify(data));
+          } catch (error) {
+            // Ignore storage write errors
+          }
+        };
+
+        if (form && storage) {
+          restoreFormValues();
+
+          const handleFormUpdate = () => {
+            persistFormValues();
+          };
+
+          form.addEventListener('input', handleFormUpdate);
+          form.addEventListener('change', handleFormUpdate);
+
+          form.addEventListener('submit', () => {
+            try {
+              storage.removeItem(STORAGE_KEY);
+            } catch (error) {
+              // Ignore storage removal errors
+            }
+          });
+        }
+
         const phoneInput = document.querySelector('#phone');
         if (!phoneInput) {
           return;
