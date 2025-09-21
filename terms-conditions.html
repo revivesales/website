@@ -35,20 +35,6 @@
     <link rel="stylesheet" crossorigin href="/assets/index-BW-gzsfY.css">
   </head>
   <body>
-    <script>
-      // Handle anchor links with smooth scrolling
-      document.addEventListener('DOMContentLoaded', function() {
-        // Handle clicks on anchor links
-        document.addEventListener('click', function(e) {
-          const link = e.target.closest('a[href*="#"]');
-          if (link && link.href.includes('index.html#')) {
-            e.preventDefault();
-            const targetId = link.href.split('#')[1];
-            window.location.href = './index.html#' + targetId;
-          }
-        });
-      });
-    </script>
     <div id="root">
       <!-- Header -->
       <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -60,13 +46,13 @@
               </a>
             </div>
             <nav class="hidden md:flex space-x-8">
-              <a href="./index.html#about" class="text-gray-700 hover:text-green-600 transition-colors">About</a>
-              <a href="./index.html#how-it-works" class="text-gray-700 hover:text-green-600 transition-colors">How It Works</a>
-              <a href="./index.html#industries" class="text-gray-700 hover:text-green-600 transition-colors">Industries</a>
-              <a href="./index.html#roadmap" class="text-gray-700 hover:text-green-600 transition-colors">Your Roadmap</a>
-              <a href="./index.html#contact" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+              <a href="/#about" class="text-gray-700 hover:text-green-600 transition-colors">About</a>
+              <a href="/#how-it-works" class="text-gray-700 hover:text-green-600 transition-colors">How It Works</a>
+              <a href="/#industries" class="text-gray-700 hover:text-green-600 transition-colors">Industries</a>
+              <a href="/#roadmap" class="text-gray-700 hover:text-green-600 transition-colors">Your Roadmap</a>
+              <a href="mailto:info@revivesales.ai" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
             </nav>
-            <a href="./index.html#contact">
+            <a href="/#contact">
               <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                 Get Started
               </button>
@@ -161,23 +147,23 @@
             <div>
               <h3 class="text-lg font-semibold mb-4">Company</h3>
               <ul class="space-y-2 text-gray-400">
-                <li><a href="./index.html#about" class="hover:text-white transition-colors">About</a></li>
-                <li><a href="./index.html#how-it-works" class="hover:text-white transition-colors">How It Works</a></li>
-                <li><a href="./index.html#industries" class="hover:text-white transition-colors">Industries</a></li>
-                <li><a href="./index.html#roadmap" class="hover:text-white transition-colors">Your Roadmap</a></li>
+                <li><a href="/#about" class="hover:text-white transition-colors">About</a></li>
+                <li><a href="/#how-it-works" class="hover:text-white transition-colors">How It Works</a></li>
+                <li><a href="/#industries" class="hover:text-white transition-colors">Industries</a></li>
+                <li><a href="/#roadmap" class="hover:text-white transition-colors">Your Roadmap</a></li>
               </ul>
             </div>
             <div>
               <h3 class="text-lg font-semibold mb-4">Support</h3>
               <ul class="space-y-2 text-gray-400">
-                <li><a href="./index.html#contact" class="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="mailto:info@revivesales.ai" class="hover:text-white transition-colors">Contact</a></li>
                 <li><a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
                 <li><a href="terms-conditions.html" class="hover:text-white transition-colors">Terms & Conditions</a></li>
               </ul>
             </div>
             <div>
               <h3 class="text-lg font-semibold mb-4">Contact</h3>
-              <a href="./index.html#contact" class="text-gray-400 hover:text-white transition-colors">
+              <a href="/#contact" class="text-gray-400 hover:text-white transition-colors">
                 Ready to revive your leads?<br>
                 Get started today.
               </a>
