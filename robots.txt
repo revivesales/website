@@ -18,3 +18,7 @@ Disallow: /index-backup.html
 Disallow: /partials/header.html
 Disallow: /partials/footer.html
 
+# Disallow crawling of demo intake flow
+Disallow: /demo-ai-training.html
+Disallow: /demo-ai-training-confirmation.html
+
