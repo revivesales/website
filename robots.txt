@@ -14,3 +14,7 @@ Disallow: /privacy-policy.html
 Disallow: /terms-conditions.html
 Disallow: /index-backup.html
 
+# Disallow crawling of partial templates
+Disallow: /partials/header.html
+Disallow: /partials/footer.html
+
