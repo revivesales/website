@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=1750774954">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png?v=1750774954">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=1750774954">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png?v=1750774954">
+    <link rel="shortcut icon" href="favicon.ico?v=1750774954">
+    <meta name="msapplication-TileImage" content="favicon.png?v=1750774954">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Estimate appointments, enrollments, revenue, and ROI from your Revive campaigns with our interactive profit calculator."
+    >
+    <title>Revive Profit Calculator</title>
+    <link rel="canonical" href="https://revivesales.ai/profit-calculator.html">
+    <link rel="stylesheet" crossorigin href="/assets/index-BW-gzsfY.css">
+    <style>
+      .profit-calculator {
+        --profit-bg: #0f1222;
+        --profit-card: #161a32;
+        --profit-ink: #e9ecff;
+        --profit-muted: #a9b0d9;
+        --profit-accent: #6aa0ff;
+        --profit-accent-2: #9cf0d7;
+        --profit-danger: #ff7a7a;
+        --profit-ring: 0 0 0 2px rgba(106, 160, 255, 0.35), 0 12px 24px rgba(0, 0, 0, 0.28);
+        background: linear-gradient(180deg, #0b0e1b, #101433);
+        border-radius: 1.75rem;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 25px 60px rgba(15, 18, 34, 0.45);
+        color: var(--profit-ink);
+      }
+
+      .profit-calculator__inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2.25rem;
+      }
+
+      .profit-calculator__lead {
+        color: var(--profit-muted);
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+
+      .profit-calculator__grid {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+      }
+
+      .profit-calculator__card,
+      .profit-calculator__out {
+        background: var(--profit-card);
+        border-radius: 0.9rem;
+        padding: 1.5rem;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .profit-calculator__card {
+        grid-column: span 7;
+      }
+
+      .profit-calculator__out {
+        grid-column: span 5;
+      }
+
+      .profit-calculator__quick-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+
+      .profit-calculator__fields {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+      }
+
+      .profit-calculator label {
+        display: block;
+        color: var(--profit-muted);
+        font: 500 0.9rem/1.15 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        margin-bottom: 0.4rem;
+      }
+
+      .profit-calculator input {
+        width: 100%;
+        padding: 0.75rem 0.75rem;
+        border-radius: 0.65rem;
+        border: 1px solid #232954;
+        background: #0e1230;
+        color: var(--profit-ink);
+        font: 600 1rem/1.1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        outline: none;
+      }
+
+      .profit-calculator input:focus {
+        box-shadow: var(--profit-ring);
+        border-color: transparent;
+      }
+
+      .profit-calculator__actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 1.1rem;
+      }
+
+      .profit-calculator__button {
+        cursor: pointer;
+        border: none;
+        border-radius: 0.65rem;
+        padding: 0.65rem 0.9rem;
+        background: #0e1437;
+        color: var(--profit-ink);
+        font: 600 0.9rem/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        transition: background 0.2s ease;
+      }
+
+      .profit-calculator__button:hover {
+        background: #0c1231;
+      }
+
+      .profit-calculator__button--accent {
+        background: var(--profit-accent);
+        color: #08122a;
+      }
+
+      .profit-calculator__button--ghost {
+        border: 1px solid #273062;
+      }
+
+      .profit-calculator__muted {
+        color: var(--profit-muted);
+        font-size: 0.9rem;
+      }
+
+      .profit-calculator__stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.75rem;
+      }
+
+      .profit-calculator__tile {
+        background: #0e1230;
+        border: 1px solid #232954;
+        border-radius: 0.75rem;
+        padding: 0.9rem;
+      }
+
+      .profit-calculator__tile-key {
+        color: var(--profit-muted);
+        font: 600 0.8rem/1.1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .profit-calculator__tile-value {
+        color: var(--profit-ink);
+        font: 800 1.15rem/1.2 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        margin-top: 0.35rem;
+      }
+
+      .profit-calculator__tile-value--positive {
+        color: var(--profit-accent-2);
+      }
+
+      .profit-calculator__tile-value--negative {
+        color: var(--profit-danger);
+      }
+
+      .profit-calculator__footnote {
+        margin-top: 0.75rem;
+        color: var(--profit-muted);
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 980px) {
+        .profit-calculator__card,
+        .profit-calculator__out {
+          grid-column: 1 / -1;
+        }
+
+        .profit-calculator__fields {
+          grid-template-columns: 1fr;
+        }
+
+        .profit-calculator__stats {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- Header -->
+      <div id="site-header"></div>
+
+      <!-- Main Content -->
+      <main class="min-h-screen bg-white py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Revive Profit Calculator</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+              Enter your numbers or tap a quick rate to estimate appointments, enrollments, revenue, Revive fees, net, and ROI.
+            </p>
+          </div>
+
+          <section class="profit-calculator">
+            <div class="profit-calculator__inner">
+              <p class="profit-calculator__lead">
+                Update any field to instantly project outcomes based on your lead volume, appointment rates, and average deal
+                size.
+              </p>
+
+              <div class="profit-calculator__grid">
+                <section class="profit-calculator__card" aria-labelledby="profit-calculator-inputs">
+                  <h2 id="profit-calculator-inputs" class="sr-only">Profit calculator inputs</h2>
+                  <div class="profit-calculator__quick-actions">
+                    <button class="profit-calculator__button profit-calculator__button--ghost" data-rate="2">Quick rate: 2%</button>
+                    <button class="profit-calculator__button profit-calculator__button--ghost" data-rate="3">Quick rate: 3%</button>
+                    <button class="profit-calculator__button profit-calculator__button--ghost" data-rate="5">Quick rate: 5%</button>
+                    <button id="reset" class="profit-calculator__button">Reset</button>
+                  </div>
+
+                  <div class="profit-calculator__fields" id="inputs">
+                    <div>
+                      <label for="leads">Lead Database Size</label>
+                      <input id="leads" type="number" min="0" step="1" value="275000" />
+                    </div>
+                    <div>
+                      <label for="apptRate">Appointment / Response Rate (%)</label>
+                      <input id="apptRate" type="number" min="0" max="100" step="0.1" value="3" />
+                    </div>
+                    <div>
+                      <label for="closeRate">Close Rate from Appointment (%)</label>
+                      <input id="closeRate" type="number" min="0" max="100" step="1" value="30" />
+                    </div>
+                    <div>
+                      <label for="revPerCust">Revenue per Closed Customer ($)</label>
+                      <input id="revPerCust" type="number" min="0" step="1" value="2000" />
+                    </div>
+                    <div>
+                      <label for="feePerAppt">Revive Fee per Appointment ($)</label>
+                      <input id="feePerAppt" type="number" min="0" step="1" value="100" />
+                    </div>
+                    <div>
+                      <label for="fixedCost">Fixed/Setup Cost ($) <span class="profit-calculator__muted">(optional)</span></label>
+                      <input id="fixedCost" type="number" min="0" step="1" value="0" />
+                    </div>
+                  </div>
+
+                  <div class="profit-calculator__actions">
+                    <button id="calc" class="profit-calculator__button profit-calculator__button--accent">Calculate</button>
+                    <span class="profit-calculator__muted">Numbers update instantly as you type.</span>
+                  </div>
+                </section>
+
+                <aside class="profit-calculator__out" aria-labelledby="profit-calculator-results">
+                  <h2 id="profit-calculator-results" class="sr-only">Profit calculator results</h2>
+                  <div class="profit-calculator__stats">
+                    <div class="profit-calculator__tile">
+                      <div class="profit-calculator__tile-key">Appointments</div>
+                      <div id="outAppts" class="profit-calculator__tile-value">—</div>
+                    </div>
+                    <div class="profit-calculator__tile">
+                      <div class="profit-calculator__tile-key">Enrollments</div>
+                      <div id="outEnroll" class="profit-calculator__tile-value">—</div>
+                    </div>
+                    <div class="profit-calculator__tile">
+                      <div class="profit-calculator__tile-key">Gross Revenue</div>
+                      <div id="outGross" class="profit-calculator__tile-value">—</div>
+                    </div>
+                    <div class="profit-calculator__tile">
+                      <div class="profit-calculator__tile-key">Revive Commission</div>
+                      <div id="outComm" class="profit-calculator__tile-value">—</div>
+                    </div>
+                    <div class="profit-calculator__tile">
+                      <div class="profit-calculator__tile-key">Total Cost (Comm + Fixed)</div>
+                      <div id="outCost" class="profit-calculator__tile-value">—</div>
+                    </div>
+                    <div class="profit-calculator__tile">
+                      <div class="profit-calculator__tile-key">Net Revenue</div>
+                      <div id="outNet" class="profit-calculator__tile-value profit-calculator__tile-value--positive">—</div>
+                    </div>
+                    <div class="profit-calculator__tile">
+                      <div class="profit-calculator__tile-key">ROI</div>
+                      <div id="outROI" class="profit-calculator__tile-value">—</div>
+                    </div>
+                  </div>
+                  <p class="profit-calculator__footnote">
+                    Estimates only. Actual outcomes depend on list quality, market, pricing, calendar availability, and offer.
+                  </p>
+                </aside>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <div id="site-footer"></div>
+    </div>
+
+    <script>
+      (function () {
+        const $ = (id) => document.getElementById(id);
+        const nf = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+        const cf = new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+        const pf = new Intl.NumberFormat(undefined, { style: 'percent', maximumFractionDigits: 1 });
+
+        const els = {
+          leads: $('leads'),
+          apptRate: $('apptRate'),
+          closeRate: $('closeRate'),
+          revPerCust: $('revPerCust'),
+          feePerAppt: $('feePerAppt'),
+          fixedCost: $('fixedCost'),
+          outAppts: $('outAppts'),
+          outEnroll: $('outEnroll'),
+          outGross: $('outGross'),
+          outComm: $('outComm'),
+          outCost: $('outCost'),
+          outNet: $('outNet'),
+          outROI: $('outROI'),
+          calc: $('calc'),
+          reset: $('reset')
+        };
+
+        function val(n, min = 0) {
+          const x = Number(n);
+          return Number.isFinite(x) && x >= min ? x : 0;
+        }
+
+        function compute() {
+          const leads = val(els.leads.value, 0);
+          const apptPct = Math.min(Math.max(val(els.apptRate.value, 0), 0), 100) / 100;
+          const closePct = Math.min(Math.max(val(els.closeRate.value, 0), 0), 100) / 100;
+          const revPer = val(els.revPerCust.value, 0);
+          const feePer = val(els.feePerAppt.value, 0);
+          const fixed = val(els.fixedCost.value, 0);
+
+          const appointments = Math.round(leads * apptPct);
+          const enrollments = Math.round(appointments * closePct);
+          const gross = enrollments * revPer;
+          const commission = appointments * feePer;
+          const totalCost = commission + fixed;
+          const net = gross - totalCost;
+          const roi = totalCost > 0 ? net / totalCost : null;
+
+          els.outAppts.textContent = nf.format(appointments);
+          els.outEnroll.textContent = nf.format(enrollments);
+          els.outGross.textContent = cf.format(gross);
+          els.outComm.textContent = cf.format(commission);
+          els.outCost.textContent = cf.format(totalCost);
+          els.outNet.textContent = cf.format(net);
+          els.outNet.classList.toggle('profit-calculator__tile-value--positive', net >= 0);
+          els.outNet.classList.toggle('profit-calculator__tile-value--negative', net < 0);
+          els.outROI.textContent = roi === null ? '—' : pf.format(roi);
+        }
+
+        document.querySelectorAll('[data-rate]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            els.apptRate.value = btn.dataset.rate;
+            compute();
+          });
+        });
+
+        Object.values(els).forEach((el) => {
+          if (el && el.tagName === 'INPUT') {
+            el.addEventListener('input', compute);
+          }
+        });
+
+        els.calc.addEventListener('click', compute);
+        els.reset.addEventListener('click', () => {
+          els.leads.value = 275000;
+          els.apptRate.value = 3;
+          els.closeRate.value = 30;
+          els.revPerCust.value = 2000;
+          els.feePerAppt.value = 100;
+          els.fixedCost.value = 0;
+          compute();
+        });
+
+        compute();
+      })();
+    </script>
+    <script src="assets/js/includes.js" data-include-script defer></script>
+  </body>
+</html>
