@@ -20,6 +20,56 @@
     <link rel="canonical" href="https://revivesales.ai/profit-calculator.html">
     <link rel="stylesheet" crossorigin href="/assets/index-BW-gzsfY.css">
     <style>
+      /* Promotional banner styles */
+      #promotional-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        color: white;
+        text-align: center;
+        padding: 12px 20px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1.4;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      #promotional-banner:hover {
+        background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+        transform: translateY(1px);
+      }
+
+      body {
+        padding-top: 45px;
+      }
+
+      /* Ensure header stays below banner */
+      header,
+      nav,
+      [role="banner"],
+      .sticky {
+        z-index: 50 !important;
+        top: 45px !important; /* Account for banner height */
+      }
+
+      @media (max-width: 768px) {
+        header,
+        nav,
+        [role="banner"],
+        .sticky {
+          top: 55px !important; /* Account for mobile banner height */
+        }
+        body {
+          padding-top: 55px; /* Account for mobile banner height */
+        }
+      }
+
       .profit-calculator {
         --pc-text: #0f172a;
         --pc-muted: #64748b;
@@ -281,6 +331,12 @@
     </style>
   </head>
   <body>
+    <div
+      id="promotional-banner"
+      onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });"
+    >
+      🚀 Up to 80% of your pipeline goes cold — Ava brings those leads back as booked sales calls fast! <b>Talk to Ava Now →</b>
+    </div>
     <div id="root">
       <!-- Header -->
       <div id="site-header"></div>
@@ -371,6 +427,39 @@
             </div>
           </section>
         </div>
+
+        <section id="contact" class="py-20 bg-gradient-to-br from-green-600 to-green-700">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-5xl font-bold text-white mb-6">
+                See what Ava, our AI Sales Agent, can do for your Leads! Try it now:
+              </h2>
+              <p class="text-xl text-green-100">
+                Text with our AI Sales Agent to book a call and apply for a 100% free trial to revive your cold leads!
+              </p>
+            </div>
+            <div class="max-w-2xl mx-auto p-8 bg-white rounded">
+              <iframe
+                src="https://api.leadconnectorhq.com/widget/form/PE0cLAAGSrmxmmimaMRt"
+                style="width:100%;height:100%;border:none;border-radius:3px"
+                id="inline-PE0cLAAGSrmxmmimaMRt"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Form 1"
+                data-height="644"
+                data-layout-iframe-id="inline-PE0cLAAGSrmxmmimaMRt"
+                data-form-id="PE0cLAAGSrmxmmimaMRt"
+                title="Form 1"
+              ></iframe>
+            </div>
+            <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+          </div>
+        </section>
       </main>
 
       <!-- Footer -->
