@@ -22,3 +22,6 @@ Disallow: /partials/footer.html
 Disallow: /demo-ai-training.html
 Disallow: /demo-ai-training-confirmation.html
 
+# Disallow crawling of launch campaign pages
+Disallow: /8-day-launch.html
+
