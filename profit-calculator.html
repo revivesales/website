@@ -20,6 +20,85 @@
     <link rel="canonical" href="https://revivesales.ai/profit-calculator.html">
     <link rel="stylesheet" crossorigin href="/assets/index-BW-gzsfY.css">
     <style>
+      /* Override header shrinking when sticky */
+      header,
+      nav,
+      [role="banner"],
+      .sticky,
+      [class*="header"],
+      [class*="Header"],
+      [class*="nav"],
+      [class*="Nav"] {
+        min-height: 60px !important;
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+        transition: none !important;
+      }
+
+      /* Ensure header elements maintain size when sticky */
+      header.sticky,
+      nav.sticky,
+      [role="banner"].sticky,
+      .sticky header,
+      .sticky nav,
+      [class*="header"].sticky,
+      [class*="Header"].sticky,
+      [class*="nav"].sticky,
+      [class*="Nav"].sticky {
+        min-height: 60px !important;
+        height: auto !important;
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        transform: none !important;
+        scale: 1 !important;
+        transition: none !important;
+      }
+
+      /* Prevent any transform or scale changes */
+      header *,
+      nav *,
+      [role="banner"] *,
+      .sticky *,
+      [class*="header"] *,
+      [class*="Header"] *,
+      [class*="nav"] *,
+      [class*="Nav"] * {
+        transform: none !important;
+        scale: 1 !important;
+      }
+
+      /* Force specific padding classes to maintain reasonable size */
+      .p-0,
+      .p-1,
+      .p-2,
+      .p-3,
+      .p-4,
+      .p-6,
+      .p-8,
+      .px-0,
+      .px-1,
+      .px-2,
+      .px-3,
+      .px-4,
+      .px-6,
+      .px-8,
+      .py-0,
+      .py-1,
+      .py-2,
+      .py-3,
+      .py-4,
+      .py-6,
+      .py-8 {
+        padding: 0.75rem !important;
+      }
+
+      /* Restore original padding for header CTA */
+      .get-started-btn {
+        padding: 0.5rem 1rem !important; /* matches py-2 px-4 */
+      }
+
       /* Promotional banner styles */
       #promotional-banner {
         position: fixed;
