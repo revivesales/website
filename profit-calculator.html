@@ -290,7 +290,7 @@
           <div class="text-center mb-12">
             <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Revive Profit Calculator</h1>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-              Enter your numbers or tap a quick rate to estimate appointments, enrollments, revenue, Revive fees, net, and ROI.
+              Enter your numbers or tap a quick rate to estimate appointments, enrollments, revenue, net, and ROI.
             </p>
           </div>
 
@@ -333,14 +333,6 @@
                       <label for="revPerCust">Revenue per Closed Customer ($)</label>
                       <input id="revPerCust" type="number" min="0" step="1" value="2000" />
                     </div>
-                    <div>
-                      <label for="feePerAppt">Revive Fee per Appointment ($)</label>
-                      <input id="feePerAppt" type="number" min="0" step="1" value="100" />
-                    </div>
-                    <div>
-                      <label for="fixedCost">Fixed/Setup Cost ($) <span class="profit-calculator__muted">(optional)</span></label>
-                      <input id="fixedCost" type="number" min="0" step="1" value="0" />
-                    </div>
                   </div>
 
                   <div class="profit-calculator__actions">
@@ -364,14 +356,6 @@
                     <div class="profit-calculator__tile">
                       <div class="profit-calculator__tile-key">Gross Revenue</div>
                       <div id="outGross" class="profit-calculator__tile-value">—</div>
-                    </div>
-                    <div class="profit-calculator__tile">
-                      <div class="profit-calculator__tile-key">Revive Commission</div>
-                      <div id="outComm" class="profit-calculator__tile-value">—</div>
-                    </div>
-                    <div class="profit-calculator__tile">
-                      <div class="profit-calculator__tile-key">Total Cost (Comm + Fixed)</div>
-                      <div id="outCost" class="profit-calculator__tile-value">—</div>
                     </div>
                     <div class="profit-calculator__tile">
                       <div class="profit-calculator__tile-key">Net Revenue</div>
@@ -408,13 +392,9 @@
           apptRate: $('apptRate'),
           closeRate: $('closeRate'),
           revPerCust: $('revPerCust'),
-          feePerAppt: $('feePerAppt'),
-          fixedCost: $('fixedCost'),
           outAppts: $('outAppts'),
           outEnroll: $('outEnroll'),
           outGross: $('outGross'),
-          outComm: $('outComm'),
-          outCost: $('outCost'),
           outNet: $('outNet'),
           outROI: $('outROI'),
           calc: $('calc'),
@@ -431,22 +411,16 @@
           const apptPct = Math.min(Math.max(val(els.apptRate.value, 0), 0), 100) / 100;
           const closePct = Math.min(Math.max(val(els.closeRate.value, 0), 0), 100) / 100;
           const revPer = val(els.revPerCust.value, 0);
-          const feePer = val(els.feePerAppt.value, 0);
-          const fixed = val(els.fixedCost.value, 0);
 
           const appointments = Math.round(leads * apptPct);
           const enrollments = Math.round(appointments * closePct);
           const gross = enrollments * revPer;
-          const commission = appointments * feePer;
-          const totalCost = commission + fixed;
-          const net = gross - totalCost;
-          const roi = totalCost > 0 ? net / totalCost : null;
+          const net = gross;
+          const roi = null;
 
           els.outAppts.textContent = nf.format(appointments);
           els.outEnroll.textContent = nf.format(enrollments);
           els.outGross.textContent = cf.format(gross);
-          els.outComm.textContent = cf.format(commission);
-          els.outCost.textContent = cf.format(totalCost);
           els.outNet.textContent = cf.format(net);
           els.outNet.classList.toggle('profit-calculator__tile-value--positive', net >= 0);
           els.outNet.classList.toggle('profit-calculator__tile-value--negative', net < 0);
@@ -472,8 +446,6 @@
           els.apptRate.value = 3;
           els.closeRate.value = 30;
           els.revPerCust.value = 2000;
-          els.feePerAppt.value = 100;
-          els.fixedCost.value = 0;
           compute();
         });
 
