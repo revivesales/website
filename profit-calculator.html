@@ -35,7 +35,7 @@
         font-size: 14px;
         line-height: 1.4;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease, opacity 0.3s ease;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
@@ -45,8 +45,18 @@
         transform: translateY(1px);
       }
 
+      #promotional-banner.banner-hidden {
+        opacity: 0;
+        transform: translateY(-120%);
+        pointer-events: none;
+      }
+
       body {
         padding-top: 45px;
+      }
+
+      body.banner-hidden {
+        padding-top: 0;
       }
 
       /* Ensure header stays below banner */
@@ -58,6 +68,13 @@
         top: 45px !important; /* Account for banner height */
       }
 
+      body.banner-hidden header,
+      body.banner-hidden nav,
+      body.banner-hidden [role="banner"],
+      body.banner-hidden .sticky {
+        top: 0 !important;
+      }
+
       @media (max-width: 768px) {
         header,
         nav,
@@ -67,6 +84,15 @@
         }
         body {
           padding-top: 55px; /* Account for mobile banner height */
+        }
+        body.banner-hidden {
+          padding-top: 0;
+        }
+        body.banner-hidden header,
+        body.banner-hidden nav,
+        body.banner-hidden [role="banner"],
+        body.banner-hidden .sticky {
+          top: 0 !important;
         }
       }
 
@@ -468,6 +494,41 @@
 
     <script>
       (function () {
+        const banner = document.getElementById('promotional-banner');
+        const contactSection = document.getElementById('contact');
+
+        if (banner && contactSection) {
+          let hidden = false;
+          const toggleBanner = (shouldHide) => {
+            if (shouldHide === hidden) return;
+            hidden = shouldHide;
+            banner.classList.toggle('banner-hidden', shouldHide);
+            document.body.classList.toggle('banner-hidden', shouldHide);
+          };
+
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(
+              ([entry]) => {
+                if (entry) {
+                  toggleBanner(entry.isIntersecting);
+                }
+              },
+              { threshold: 0.25 }
+            );
+            observer.observe(contactSection);
+          } else {
+            const checkBanner = () => {
+              const rect = contactSection.getBoundingClientRect();
+              const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+              const isVisible = rect.top < viewportHeight && rect.bottom > 0;
+              toggleBanner(isVisible);
+            };
+            window.addEventListener('scroll', checkBanner, { passive: true });
+            window.addEventListener('resize', checkBanner);
+            checkBanner();
+          }
+        }
+
         const $ = (id) => document.getElementById(id);
         const nf = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
         const cf = new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
