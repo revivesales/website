@@ -12,6 +12,8 @@ Disallow: /*.json$
 # Disallow crawling of legal pages
 Disallow: /privacy-policy.html
 Disallow: /terms-conditions.html
+
+# Disallow crawling of backup index page
 Disallow: /index-backup.html
 
 # Disallow crawling of partial templates
