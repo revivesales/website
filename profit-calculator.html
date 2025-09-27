@@ -49,6 +49,7 @@
         color: var(--pc-muted);
         font-size: 1.05rem;
         line-height: 1.65;
+        text-align: center;
       }
 
       .profit-calculator__grid {
@@ -303,7 +304,7 @@
 
               <div class="profit-calculator__grid">
                 <section class="profit-calculator__card" aria-labelledby="profit-calculator-inputs">
-                  <h2 id="profit-calculator-inputs" class="profit-calculator__section-title">Input assumptions</h2>
+                  <h2 id="profit-calculator-inputs" class="profit-calculator__section-title">Input Assumptions</h2>
                   <p class="profit-calculator__muted">Adjust the numbers below to mirror your database, conversions, and offer economics.</p>
 
                   <div class="profit-calculator__quick-group" aria-label="Quick rate presets">
@@ -342,8 +343,8 @@
                 </section>
 
                 <aside class="profit-calculator__out" aria-labelledby="profit-calculator-results">
-                  <h2 id="profit-calculator-results" class="profit-calculator__section-title">Projected outcomes</h2>
-                  <p class="profit-calculator__muted">We update appointments, revenue, and ROI in real time as you make changes.</p>
+                  <h2 id="profit-calculator-results" class="profit-calculator__section-title">Projected Outcomes</h2>
+                  <p class="profit-calculator__muted">We update appointments, enrollments, and revenue in real time as you make changes.</p>
                   <div class="profit-calculator__stats">
                     <div class="profit-calculator__tile">
                       <div class="profit-calculator__tile-key">Appointments</div>
@@ -360,10 +361,6 @@
                     <div class="profit-calculator__tile">
                       <div class="profit-calculator__tile-key">Net Revenue</div>
                       <div id="outNet" class="profit-calculator__tile-value profit-calculator__tile-value--positive">—</div>
-                    </div>
-                    <div class="profit-calculator__tile">
-                      <div class="profit-calculator__tile-key">ROI</div>
-                      <div id="outROI" class="profit-calculator__tile-value">—</div>
                     </div>
                   </div>
                   <p class="profit-calculator__footnote">
@@ -385,7 +382,6 @@
         const $ = (id) => document.getElementById(id);
         const nf = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
         const cf = new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-        const pf = new Intl.NumberFormat(undefined, { style: 'percent', maximumFractionDigits: 1 });
 
         const els = {
           leads: $('leads'),
@@ -396,7 +392,6 @@
           outEnroll: $('outEnroll'),
           outGross: $('outGross'),
           outNet: $('outNet'),
-          outROI: $('outROI'),
           calc: $('calc'),
           reset: $('reset')
         };
@@ -416,7 +411,6 @@
           const enrollments = Math.round(appointments * closePct);
           const gross = enrollments * revPer;
           const net = gross;
-          const roi = null;
 
           els.outAppts.textContent = nf.format(appointments);
           els.outEnroll.textContent = nf.format(enrollments);
@@ -424,7 +418,6 @@
           els.outNet.textContent = cf.format(net);
           els.outNet.classList.toggle('profit-calculator__tile-value--positive', net >= 0);
           els.outNet.classList.toggle('profit-calculator__tile-value--negative', net < 0);
-          els.outROI.textContent = roi === null ? '—' : pf.format(roi);
         }
 
         document.querySelectorAll('[data-rate]').forEach((btn) => {
