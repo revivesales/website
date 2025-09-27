@@ -20,6 +20,56 @@
     <link rel="canonical" href="https://revivesales.ai/profit-calculator.html">
     <link rel="stylesheet" crossorigin href="/assets/index-BW-gzsfY.css">
     <style>
+      /* Promotional banner styles */
+      #promotional-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        color: white;
+        text-align: center;
+        padding: 12px 20px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1.4;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      #promotional-banner:hover {
+        background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+        transform: translateY(1px);
+      }
+
+      body {
+        padding-top: 45px;
+      }
+
+      /* Ensure header stays below banner */
+      header,
+      nav,
+      [role="banner"],
+      .sticky {
+        z-index: 50 !important;
+        top: 45px !important; /* Account for banner height */
+      }
+
+      @media (max-width: 768px) {
+        header,
+        nav,
+        [role="banner"],
+        .sticky {
+          top: 55px !important; /* Account for mobile banner height */
+        }
+        body {
+          padding-top: 55px; /* Account for mobile banner height */
+        }
+      }
+
       .profit-calculator {
         --pc-text: #0f172a;
         --pc-muted: #64748b;
