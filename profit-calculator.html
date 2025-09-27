@@ -35,7 +35,7 @@
         font-size: 14px;
         line-height: 1.4;
         cursor: pointer;
-        transition: transform 0.3s ease, opacity 0.3s ease;
+        transition: all 0.3s ease;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
@@ -45,18 +45,8 @@
         transform: translateY(1px);
       }
 
-      #promotional-banner.banner-hidden {
-        opacity: 0;
-        transform: translateY(-120%);
-        pointer-events: none;
-      }
-
       body {
         padding-top: 45px;
-      }
-
-      body.banner-hidden {
-        padding-top: 0;
       }
 
       /* Ensure header stays below banner */
@@ -68,13 +58,6 @@
         top: 45px !important; /* Account for banner height */
       }
 
-      body.banner-hidden header,
-      body.banner-hidden nav,
-      body.banner-hidden [role="banner"],
-      body.banner-hidden .sticky {
-        top: 0 !important;
-      }
-
       @media (max-width: 768px) {
         header,
         nav,
@@ -84,15 +67,6 @@
         }
         body {
           padding-top: 55px; /* Account for mobile banner height */
-        }
-        body.banner-hidden {
-          padding-top: 0;
-        }
-        body.banner-hidden header,
-        body.banner-hidden nav,
-        body.banner-hidden [role="banner"],
-        body.banner-hidden .sticky {
-          top: 0 !important;
         }
       }
 
@@ -368,7 +342,7 @@
       <div id="site-header"></div>
 
       <!-- Main Content -->
-      <main class="min-h-screen bg-white pt-20 pb-0">
+      <main class="bg-white py-20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-12">
             <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Revive Profit Calculator</h1>
@@ -454,39 +428,40 @@
           </section>
         </div>
 
-        <section id="contact" class="py-20 bg-gradient-to-br from-green-600 to-green-700">
-          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl lg:text-5xl font-bold text-white mb-6">
-                See what Ava, our AI Sales Agent, can do for your Leads! Try it now:
-              </h2>
-              <p class="text-xl text-green-100">
-                Text with our AI Sales Agent to book a call and apply for a 100% free trial to revive your cold leads!
-              </p>
-            </div>
-            <div class="max-w-2xl mx-auto p-8 bg-white rounded">
-              <iframe
-                src="https://api.leadconnectorhq.com/widget/form/PE0cLAAGSrmxmmimaMRt"
-                style="width:100%;height:100%;border:none;border-radius:3px"
-                id="inline-PE0cLAAGSrmxmmimaMRt"
-                data-layout="{'id':'INLINE'}"
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="Form 1"
-                data-height="644"
-                data-layout-iframe-id="inline-PE0cLAAGSrmxmmimaMRt"
-                data-form-id="PE0cLAAGSrmxmmimaMRt"
-                title="Form 1"
-              ></iframe>
-            </div>
-            <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-          </div>
-        </section>
       </main>
+
+      <section id="contact" class="py-20 bg-gradient-to-br from-green-600 to-green-700">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-5xl font-bold text-white mb-6">
+              See what Ava, our AI Sales Agent, can do for your Leads! Try it now:
+            </h2>
+            <p class="text-xl text-green-100">
+              Text with our AI Sales Agent to book a call and apply for a 100% free trial to revive your cold leads!
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto p-8 bg-white rounded">
+            <iframe
+              src="https://api.leadconnectorhq.com/widget/form/PE0cLAAGSrmxmmimaMRt"
+              style="width:100%;height:100%;border:none;border-radius:3px"
+              id="inline-PE0cLAAGSrmxmmimaMRt"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Form 1"
+              data-height="644"
+              data-layout-iframe-id="inline-PE0cLAAGSrmxmmimaMRt"
+              data-form-id="PE0cLAAGSrmxmmimaMRt"
+              title="Form 1"
+            ></iframe>
+          </div>
+          <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+        </div>
+      </section>
 
       <!-- Footer -->
       <div id="site-footer"></div>
@@ -494,41 +469,6 @@
 
     <script>
       (function () {
-        const banner = document.getElementById('promotional-banner');
-        const contactSection = document.getElementById('contact');
-
-        if (banner && contactSection) {
-          let hidden = false;
-          const toggleBanner = (shouldHide) => {
-            if (shouldHide === hidden) return;
-            hidden = shouldHide;
-            banner.classList.toggle('banner-hidden', shouldHide);
-            document.body.classList.toggle('banner-hidden', shouldHide);
-          };
-
-          if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(
-              ([entry]) => {
-                if (entry) {
-                  toggleBanner(entry.isIntersecting);
-                }
-              },
-              { threshold: 0.25 }
-            );
-            observer.observe(contactSection);
-          } else {
-            const checkBanner = () => {
-              const rect = contactSection.getBoundingClientRect();
-              const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-              const isVisible = rect.top < viewportHeight && rect.bottom > 0;
-              toggleBanner(isVisible);
-            };
-            window.addEventListener('scroll', checkBanner, { passive: true });
-            window.addEventListener('resize', checkBanner);
-            checkBanner();
-          }
-        }
-
         const $ = (id) => document.getElementById(id);
         const nf = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
         const cf = new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
