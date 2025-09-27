@@ -320,7 +320,7 @@
                   <div class="profit-calculator__fields" id="inputs">
                     <div>
                       <label for="leads">Lead Database Size</label>
-                      <input id="leads" type="number" min="0" step="1" value="275000" />
+                      <input id="leads" type="number" min="0" step="1" value="10000" />
                     </div>
                     <div>
                       <label for="apptRate">Appointment / Response Rate (%)</label>
@@ -328,7 +328,7 @@
                     </div>
                     <div>
                       <label for="closeRate">Close Rate from Appointment (%)</label>
-                      <input id="closeRate" type="number" min="0" max="100" step="1" value="30" />
+                      <input id="closeRate" type="number" min="0" max="100" step="1" value="50" />
                     </div>
                     <div>
                       <label for="revPerCust">Revenue per Closed Customer ($)</label>
@@ -435,9 +435,9 @@
 
         els.calc.addEventListener('click', compute);
         els.reset.addEventListener('click', () => {
-          els.leads.value = 275000;
+          els.leads.value = 10000;
           els.apptRate.value = 3;
-          els.closeRate.value = 30;
+          els.closeRate.value = 50;
           els.revPerCust.value = 2000;
           compute();
         });
