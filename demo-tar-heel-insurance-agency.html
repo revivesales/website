@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=1750774954">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png?v=1750774954">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=1750774954">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png?v=1750774954">
+    <link rel="shortcut icon" href="favicon.ico?v=1750774954">
+    <meta name="msapplication-TileImage" content="favicon.png?v=1750774954">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Watch the Tar Heel Insurance Agency demo and connect with Ava, our AI sales agent, to revive your cold leads."
+    >
+    <title>Tar Heel Insurance Agency Demo - Revive</title>
+    <link rel="canonical" href="https://revivesales.ai/demo-tar-heel-insurance-agency.html">
+    <link rel="stylesheet" crossorigin href="/assets/index-BW-gzsfY.css">
+    <style>
+      /* Override header shrinking when sticky */
+      header,
+      nav,
+      [role="banner"],
+      .sticky,
+      [class*="header"],
+      [class*="Header"],
+      [class*="nav"],
+      [class*="Nav"] {
+        min-height: 60px !important;
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+        transition: none !important;
+      }
+
+      /* Ensure header elements maintain size when sticky */
+      header.sticky,
+      nav.sticky,
+      [role="banner"].sticky,
+      .sticky header,
+      .sticky nav,
+      [class*="header"].sticky,
+      [class*="Header"].sticky,
+      [class*="nav"].sticky,
+      [class*="Nav"].sticky {
+        min-height: 60px !important;
+        height: auto !important;
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        transform: none !important;
+        scale: 1 !important;
+        transition: none !important;
+      }
+
+      /* Prevent any transform or scale changes */
+      header *,
+      nav *,
+      [role="banner"] *,
+      .sticky *,
+      [class*="header"] *,
+      [class*="Header"] *,
+      [class*="nav"] *,
+      [class*="Nav"] * {
+        transform: none !important;
+        scale: 1 !important;
+      }
+
+      /* Force specific padding classes to maintain reasonable size */
+      .p-0,
+      .p-1,
+      .p-2,
+      .p-3,
+      .p-4,
+      .p-6,
+      .p-8,
+      .px-0,
+      .px-1,
+      .px-2,
+      .px-3,
+      .px-4,
+      .px-6,
+      .px-8,
+      .py-0,
+      .py-1,
+      .py-2,
+      .py-3,
+      .py-4,
+      .py-6,
+      .py-8 {
+        padding: 0.75rem !important;
+      }
+
+      /* Restore original padding for header CTA */
+      .get-started-btn {
+        padding: 0.5rem 1rem !important; /* matches py-2 px-4 */
+      }
+
+      /* Promotional banner styles */
+      #promotional-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        color: white;
+        text-align: center;
+        padding: 12px 20px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1.4;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      #promotional-banner:hover {
+        background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+        transform: translateY(1px);
+      }
+
+      body {
+        padding-top: 45px;
+      }
+
+      /* Ensure header stays below banner */
+      header,
+      nav,
+      [role="banner"],
+      .sticky {
+        z-index: 50 !important;
+        top: 45px !important; /* Account for banner height */
+      }
+
+      @media (max-width: 768px) {
+        header,
+        nav,
+        [role="banner"],
+        .sticky {
+          top: 55px !important; /* Account for mobile banner height */
+        }
+        body {
+          padding-top: 55px; /* Account for mobile banner height */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="promotional-banner"
+      onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });"
+    >
+      🚀 Up to 80% of your pipeline goes cold — Ava brings those leads back as booked sales calls fast! <b>Talk to Ava Now →</b>
+    </div>
+    <div id="root">
+      <!-- Header -->
+      <div id="site-header"></div>
+
+      <!-- Main Content -->
+      <main class="bg-white py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Tar Heel Insurance Agency Demo</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+              See how Ava revives cold insurance leads and books qualified appointments on autopilot.
+            </p>
+          </div>
+
+          <div class="max-w-4xl mx-auto mb-16">
+            <div class="relative w-full overflow-hidden rounded-2xl shadow-2xl bg-black" style="padding-top: 56.25%;">
+              <video
+                controls
+                preload="metadata"
+                class="absolute inset-0 h-full w-full object-cover"
+              >
+                <source src="assets/demo-tar-heel-insurance-agency.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <section id="contact" class="py-20 bg-gradient-to-br from-green-600 to-green-700">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-5xl font-bold text-white mb-6">
+              See what Ava, our AI Sales Agent, can do for your Leads! Try it now:
+            </h2>
+            <p class="text-xl text-green-100">
+              Text with our AI Sales Agent to book a call and apply for a 100% free trial to revive your cold leads!
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto p-8 bg-white rounded">
+            <iframe
+              src="https://api.leadconnectorhq.com/widget/form/PE0cLAAGSrmxmmimaMRt"
+              style="width:100%;height:100%;border:none;border-radius:3px"
+              id="inline-PE0cLAAGSrmxmmimaMRt"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Form 1"
+              data-height="644"
+              data-layout-iframe-id="inline-PE0cLAAGSrmxmmimaMRt"
+              data-form-id="PE0cLAAGSrmxmmimaMRt"
+              title="Form 1"
+            ></iframe>
+          </div>
+          <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <div id="site-footer"></div>
+    </div>
+
+    <script src="assets/js/includes.js" data-include-script defer></script>
+  </body>
+</html>
