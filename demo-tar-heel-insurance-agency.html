@@ -172,7 +172,7 @@
           </div>
 
           <div class="max-w-4xl mx-auto mb-16">
-            <div class="w-full shadow-2xl bg-black">
+            <div class="w-full shadow-2xl">
               <video
                 controls
                 preload="auto"
@@ -222,6 +222,94 @@
       <!-- Footer -->
       <div id="site-footer"></div>
     </div>
+
+    <script>
+      (function () {
+        const video = document.querySelector('#root video');
+        if (!video) {
+          return;
+        }
+
+        const PREVIEW_TIME = 0.2;
+
+        const markPreviewReady = () => {
+          video.dataset.previewReady = 'true';
+        };
+
+        const loadPreviewFrame = () => {
+          if (video.dataset.previewReady) {
+            return;
+          }
+
+          if (video.readyState >= 2) {
+            const seekToPreview = () => {
+              video.pause();
+              markPreviewReady();
+            };
+
+            const handleSeeked = () => {
+              video.removeEventListener('seeked', handleSeeked);
+              seekToPreview();
+            };
+
+            video.addEventListener('seeked', handleSeeked, { once: true });
+
+            try {
+              video.currentTime = PREVIEW_TIME;
+            } catch (error) {
+              video.removeEventListener('seeked', handleSeeked);
+              markPreviewReady();
+            }
+          }
+        };
+
+        if (video.readyState >= 2) {
+          loadPreviewFrame();
+        } else {
+          const onLoadedData = () => {
+            video.removeEventListener('loadeddata', onLoadedData);
+            loadPreviewFrame();
+          };
+
+          video.addEventListener('loadeddata', onLoadedData);
+
+          if (video.readyState === 0) {
+            video.load();
+          }
+        }
+
+        const resumeFromStart = () => {
+          if (!video.dataset.previewReady) {
+            return;
+          }
+
+          delete video.dataset.previewReady;
+
+          const resumePlayback = () => {
+            video.removeEventListener('seeked', resumePlayback);
+
+            if (video.paused) {
+              const playPromise = video.play();
+
+              if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {});
+              }
+            }
+          };
+
+          video.addEventListener('seeked', resumePlayback, { once: true });
+
+          try {
+            video.currentTime = 0;
+          } catch (error) {
+            video.removeEventListener('seeked', resumePlayback);
+            resumePlayback();
+          }
+        };
+
+        video.addEventListener('play', resumeFromStart, { once: true });
+      })();
+    </script>
 
     <script src="assets/js/includes.js" data-include-script defer></script>
   </body>
