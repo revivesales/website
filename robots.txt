@@ -24,6 +24,9 @@ Disallow: /partials/footer.html
 Disallow: /demo-ai-training.html
 Disallow: /demo-ai-training-confirmation.html
 
+# Disallow crawling of business profile intake flow
+Disallow: /business-profile.html
+Disallow: /business-profile-confirmation.html
+
 # Disallow crawling of launch campaign pages
 Disallow: /8-day-launch.html
-
