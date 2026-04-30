@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Revive guarantee page for aesthetic and cosmetic surgeons." />
+    <title>30 New Patients in 90 Days | Revive</title>
+    <link rel="stylesheet" crossorigin href="/assets/index-BW-gzsfY.css">
+  </head>
+  <body class="bg-white text-gray-900">
+    <div id="site-header"></div>
+    <main>
+      <section class="pt-24 pb-12 border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
+          <p class="text-sm uppercase tracking-[0.2em] text-green-700 font-semibold">Aesthetic and Surgical Healthcare Providers</p>
+          <h1 class="text-4xl md:text-6xl font-bold leading-tight">We Guarantee 30 New Patients in 90 Days <span class="text-green-700">or You Don’t Pay</span></h1>
+          <a href="https://revivesales.ai" class="inline-flex items-center justify-center rounded-xl bg-green-600 hover:bg-green-700 text-white px-8 py-4 text-lg font-semibold">Schedule Call Here</a>
+        </div>
+      </section>
+
+      <section class="py-14">
+        <div class="max-w-4xl mx-auto px-4 space-y-8 text-lg leading-8 text-gray-700">
+          <h2 class="text-3xl font-bold text-gray-900">How this works</h2>
+          <p>Revive installs Ava, an AI sales agent that follows up with your existing leads instantly and consistently. The goal is simple: convert dormant demand into booked consultations, procedures, and revenue without overloading your internal team.</p>
+          <p>Most practices do not have a lead generation problem — they have a lead handling problem. Revive closes that follow-up capacity gap by engaging new and cold leads at scale.</p>
+          <p>We are confident enough to make this offer in writing: if we do not help you generate 30 new patients in 90 days, you do not pay.</p>
+        </div>
+      </section>
+
+      <section class="pb-14">
+        <div class="max-w-4xl mx-auto px-4">
+          <div class="rounded-3xl bg-gray-50 p-8 md:p-10 shadow-sm border border-gray-200">
+            <h3 class="text-2xl font-bold mb-4">Sample results highlighted on the source page</h3>
+            <ul class="space-y-3 text-gray-700 list-disc pl-6">
+              <li>5.2% of reactivated cold leads booked consultations.</li>
+              <li>6.7% became hot leads requesting more information.</li>
+              <li>A 250-lead pilot reportedly generated 2 new patients, 10 booked consultations, and 6.1x ROI cash collected so far.</li>
+            </ul>
+          </div>
+          <div class="text-center mt-10">
+            <a href="https://revivesales.ai" class="inline-flex items-center justify-center rounded-xl bg-green-600 hover:bg-green-700 text-white px-8 py-4 text-lg font-semibold">Book a Strategy Call</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script>
+      async function loadPartial(id, path) {
+        const target = document.getElementById(id);
+        if (!target) return;
+        const response = await fetch(path);
+        if (!response.ok) return;
+        target.innerHTML = await response.text();
+      }
+      loadPartial('site-header', '/partials/header.html');
+      loadPartial('site-footer', '/partials/footer.html');
+    </script>
+  </body>
+</html>
